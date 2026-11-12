@@ -6,9 +6,8 @@
 <p>Pruebas de frecuencia, voltaje y refrigeración en una unidad con NerdOS v1.1.0.1</p>
 
 ![Hardware](https://img.shields.io/badge/hardware-NerdOctaxe_Gamma_Rev_3.1-2a78d6?style=flat-square)
+![Hardware](https://img.shields.io/badge/hardware-NerdOctaxe_Gamma_Rev_3.2-2a78d6?style=flat-square)
 ![Firmware](https://img.shields.io/badge/firmware-NerdOS_v1.1.0.1-2a78d6?style=flat-square)
-![Pruebas](https://img.shields.io/badge/pruebas-18-2a78d6?style=flat-square)
-![Rango](https://img.shields.io/badge/rango-600--725_MHz-2a78d6?style=flat-square)
 ![Idioma](https://img.shields.io/badge/idioma-espa%C3%B1ol-2a78d6?style=flat-square)
 
 [![Abrir el configurador interactivo](https://img.shields.io/badge/Abrir_el_configurador_interactivo-%E2%86%92-2a78d6?style=for-the-badge)](https://TU_USUARIO.github.io/TU_REPO/)
