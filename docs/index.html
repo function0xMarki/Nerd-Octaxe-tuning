@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>NerdOctaxe Rev 3.1 · Elige tu configuración</title>
+<style>
+:root{
+  --bg:#fafaf9; --surface:#ffffff; --text:#1c1917; --muted:#6b6560; --line:#e7e5e4;
+  --accent:#1d4ed8; --accent-soft:#e8eefc; --warn:#92400e; --warn-soft:#fef3c7; --bar:#d6d3d1;
+  --radius:12px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0e0e10; --surface:#17171a; --text:#f2f2f3; --muted:#a09fa6; --line:#2a2a2f;
+    --accent:#8fb0f8; --accent-soft:#1b2438; --warn:#f0b45a; --warn-soft:#2b2214; --bar:#3a3a40;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-variant-numeric:tabular-nums;
+}
+.wrap{max-width:980px; margin:0 auto; padding:32px 16px 64px}
+header{margin-bottom:28px}
+h1{font-size:clamp(1.5rem,4vw,2.1rem); line-height:1.2; margin:0 0 8px; font-weight:650; letter-spacing:-.01em}
+.sub{color:var(--muted); margin:0; max-width:68ch}
+h2{font-size:1.05rem; margin:0 0 12px; font-weight:650}
+h2 .n{color:var(--muted); font-weight:500; margin-right:6px}
+section{margin-top:28px}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px}
+.note{background:var(--warn-soft); color:var(--warn); border-radius:var(--radius); padding:12px 14px; font-size:.9rem; margin-top:16px}
+.muted{color:var(--muted)}
+.small{font-size:.86rem}
+button{font:inherit; color:inherit; cursor:pointer}
+.presets{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px}
+.chip{border:1px solid var(--line); background:var(--surface); border-radius:999px; padding:7px 14px; font-size:.92rem}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:#fff}
+@media (prefers-color-scheme: dark){ .chip[aria-pressed="true"]{color:#0e0e10} }
+.crit{list-style:none; margin:0; padding:0}
+.crit li{display:grid; grid-template-columns:auto 1fr auto auto; gap:12px; align-items:center; padding:10px 0; border-top:1px solid var(--line)}
+.crit li:first-child{border-top:0}
+.crit li.off{opacity:.5}
+.crit input[type=checkbox]{width:18px; height:18px; accent-color:var(--accent)}
+.crit .name{font-weight:600}
+.crit .hint{display:block; color:var(--muted); font-size:.84rem; font-weight:400}
+.crit .w{min-width:4.2em; text-align:right; color:var(--accent); font-weight:650}
+.mv{display:flex; gap:4px}
+.mv button{border:1px solid var(--line); background:var(--surface); border-radius:8px; width:32px; height:32px; line-height:1}
+.mv button:disabled{opacity:.35; cursor:default}
+.row{display:flex; flex-wrap:wrap; gap:18px 28px; align-items:center}
+.row label{display:flex; align-items:center; gap:8px; flex-wrap:wrap; max-width:100%}
+input[type=range]{width:240px; max-width:100%; accent-color:var(--accent)}
+.best{border-color:var(--accent); background:linear-gradient(180deg,var(--accent-soft),var(--surface) 70%)}
+.best .label{font-size:.78rem; text-transform:uppercase; letter-spacing:.08em; color:var(--accent); font-weight:650}
+.best h3{margin:4px 0 2px; font-size:clamp(1.4rem,4vw,1.9rem); font-weight:650; letter-spacing:-.01em}
+.best .tag{color:var(--muted); margin:0 0 14px}
+.metrics{display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:12px; margin:14px 0}
+.metric{background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:10px 12px}
+.metric b{display:block; font-size:1.2rem; font-weight:650}
+.metric span{color:var(--muted); font-size:.8rem}
+.apply{border:1px dashed var(--line); border-radius:10px; padding:12px 14px; margin-top:14px; font-size:.92rem}
+.apply code{font:inherit; font-weight:600}
+.btn{border:1px solid var(--line); background:var(--surface); border-radius:10px; padding:8px 14px; margin-top:10px; font-size:.9rem}
+.btn:hover{border-color:var(--accent)}
+.bars{display:grid; gap:6px; margin-top:6px}
+.bar{display:grid; grid-template-columns:150px 1fr 38px; gap:10px; align-items:center; font-size:.84rem}
+.bar i{display:block; height:8px; border-radius:99px; background:var(--bar); position:relative; overflow:hidden}
+.bar i u{position:absolute; inset:0 auto 0 0; background:var(--accent); border-radius:99px; text-decoration:none}
+.bar em{font-style:normal; text-align:right; color:var(--muted)}
+.runners{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; margin-top:14px}
+.runners h4{margin:0 0 2px; font-size:1rem}
+.tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius); background:var(--surface)}
+table{border-collapse:collapse; width:100%; min-width:760px; font-size:.88rem}
+th,td{padding:9px 12px; text-align:right; border-top:1px solid var(--line); white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+thead th{border-top:0; color:var(--muted); font-weight:600; font-size:.78rem; text-transform:uppercase; letter-spacing:.04em}
+tr.top td{background:var(--accent-soft); font-weight:600}
+tr.out td{color:var(--muted)}
+tr.why td{color:var(--muted); font-size:.8rem; padding-top:0; border-top:0; text-align:left; white-space:normal}
+tr.out td{border-bottom:0}
+details{margin-top:12px}
+summary{cursor:pointer; font-weight:600}
+details p,details li{color:var(--muted); font-size:.9rem}
+footer{margin-top:40px; color:var(--muted); font-size:.82rem}
+.empty{padding:20px; text-align:center; color:var(--muted)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+@media (max-width:560px){
+  .crit li{grid-template-columns:auto 1fr auto}
+  .crit .w{display:none}
+  .bar{grid-template-columns:110px 1fr 34px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>NerdOctaxe Rev 3.1: elige tu configuración</h1>
+    <p class="sub">Ordena lo que te importa y la página te dice qué frecuencia, voltaje y target de ASIC usar. Los datos salen de 18 pruebas en una sola unidad, con NerdOS v1.1.0.1.</p>
+    <div class="note"><b>Antes de usarla:</b> los valores son de una unidad concreta, con dos ventiladores Noctua traseros para los VR y control separado de los dos ventiladores, en una habitación de 22 a 25 °C. Con la refrigeración de serie no se han probado y no valen. Subir frecuencia o voltaje puede dañar el equipo.</div>
+  </header>
+
+  <section aria-labelledby="h-prio">
+    <h2 id="h-prio"><span class="n">1</span>Tus prioridades</h2>
+    <div class="card">
+      <div class="presets" id="presets" role="group" aria-label="Perfiles rápidos"></div>
+      <ol class="crit" id="crit"></ol>
+      <p class="muted small" id="critNote" style="margin:12px 0 0"></p>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-cond">
+    <h2 id="h-cond"><span class="n">2</span>Tus condiciones</h2>
+    <div class="card">
+      <div class="row">
+        <label>Habitación <input type="range" id="room" min="18" max="34" step="0.5" value="23" aria-describedby="roomNote"> <b id="roomVal"></b></label>
+      </div>
+      <p class="muted small" id="roomNote" style="margin:8px 0 14px"></p>
+      <div class="row" id="targets">
+        <span>Target de ASIC permitido:</span>
+        <label><input type="checkbox" value="50" checked> 50 °C</label>
+        <label><input type="checkbox" value="52" checked> 52 °C</label>
+        <label><input type="checkbox" value="55" checked> 55 °C</label>
+        <label><input type="checkbox" id="stable"> Solo estables (rechazados ≤0,5%)</label>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-res" aria-live="polite">
+    <h2 id="h-res"><span class="n">3</span>Mejor configuración para ti</h2>
+    <div id="result"></div>
+  </section>
+
+  <section aria-labelledby="h-all">
+    <h2 id="h-all"><span class="n">4</span>Todas las configuraciones</h2>
+    <div class="tablewrap"><table id="all"></table></div>
+    <details>
+      <summary>Cómo se calcula</summary>
+      <ul>
+        <li>Cada criterio se normaliza de 0 a 100 entre las configuraciones que cumplen tus condiciones: 0 la peor, 100 la mejor.</li>
+        <li>Los pesos dependen del orden que eliges: 100% con un criterio; 60/40 con dos; 50/30/20 con tres; 40/30/20/10 con cuatro; 35/25/20/12/8 con cinco. Los perfiles rápidos usan sus propios pesos, que se muestran en la lista.</li>
+        <li><b>Cuidado</b> es la media de dos subíndices: esfuerzo de ventiladores (media del % de M2 y M1) y corriente de entrada. <b>Temperatura</b> es la habitación máxima que sostiene el target del ASIC con M2 ≤85%: T ASIC − 0,150 K/W × W, una estimación con ±2 a 3 °C.</li>
+        <li>Solo compiten configuraciones seguras: M2 ≤85%, corriente ≤18 A y rechazados ≤1,0%. 650 MHz / 1,17 V con el ASIC a 50 °C queda fuera siempre, con M2 al 91%.</li>
+        <li>"Más equilibrada" elige la configuración cuyo peor criterio entre hashrate, eficiencia y comodidad (media de cuidado y temperatura) es el mejor posible, entre las estables.</li>
+        <li>Coste con los vatios del panel, 0,12 €/kWh, 24 h × 30 días. Los vatios de pared serían entre un 8 y un 19% mayores; no se midieron.</li>
+      </ul>
+    </details>
+  </section>
+
+  <footer>
+    Datos: informe de configuraciones óptimas del NerdOctaxe Gamma Rev 3.1 (VRM de 6 fases y snubber mejorado), NerdOS v1.1.0.1, pool pool.bitronics.store:3443. Medias de 1 h del panel; sesiones de 1,5 a 20 h. Resultados de una sola unidad: mide los tuyos antes de copiar un valor.
+  </footer>
+</div>
+
+<script>
+/* ===== Datos (una fila por configuración en régimen estable) ===== */
+var DATA=[
+ {id:'c600_55', mhz:600, v:1.13, asic:55, ths:9.69,  w:150.8, m2:42, m1:31, a:12.7, rech:0.40, src:'6, V2'},
+ {id:'c625_55', mhz:625, v:1.15, asic:55, ths:10.14, w:161.3, m2:46, m1:32, a:13.6, rech:0.42, src:'T2c'},
+ {id:'c625_52', mhz:625, v:1.15, asic:52, ths:10.11, w:157.3, m2:71, m1:24, a:13.6, rech:0.40, src:'1'},
+ {id:'c625_50', mhz:625, v:1.15, asic:50, ths:10.03, w:156.3, m2:81, m1:17, a:13.1, rech:0.42, src:'T2'},
+ {id:'c650_55', mhz:650, v:1.17, asic:55, ths:10.58, w:173.5, m2:48, m1:35, a:14.5, rech:0.39, src:'2b, V1'},
+ {id:'c650_52', mhz:650, v:1.17, asic:52, ths:10.55, w:168.3, m2:72, m1:25, a:14.5, rech:0.38, src:'2, T3-B'},
+ {id:'c650_50', mhz:650, v:1.17, asic:50, ths:10.51, w:167.3, m2:91, m1:18, a:14.1, rech:0.59, src:'T3-A'},
+ {id:'c675_119',mhz:675, v:1.19, asic:55, ths:11.00, w:182.8, m2:58, m1:40, a:15.5, rech:0.72, src:'3'},
+ {id:'c675_120',mhz:675, v:1.20, asic:55, ths:10.99, w:186.8, m2:65, m1:45, a:15.9, rech:0.44, src:'3b'},
+ {id:'c700_121',mhz:700, v:1.21, asic:55, ths:11.40, w:194.0, m2:67, m1:48, a:16.9, rech:0.51, src:'4, 4R, V3'},
+ {id:'c700_122',mhz:700, v:1.22, asic:55, ths:11.39, w:198.3, m2:66, m1:43, a:16.9, rech:0.65, src:'4b'},
+ {id:'c725_123',mhz:725, v:1.23, asic:55, ths:11.81, w:206.5, m2:81, m1:50, a:17.8, rech:0.61, src:'5'}
+];
+var CRIT=[
+ {k:'care', name:'Cuidado de componentes', hint:'Esfuerzo de los ventiladores y corriente de entrada: menos desgaste y menos estrés en los VR.'},
+ {k:'temp', name:'Temperatura', hint:'Margen térmico: la habitación máxima que aguanta con el ASIC en su target y el ventilador ≤85%.'},
+ {k:'eff',  name:'Eficiencia', hint:'Menos julios por terahash (J/TH).'},
+ {k:'hash', name:'Hashrate', hint:'TH/s efectivos, descontando los rechazados.'},
+ {k:'cost', name:'Coste mensual', hint:'Euros al mes con los vatios del panel.'},
+ {k:'stab', name:'Estabilidad', hint:'Menos shares rechazados.'}
+];
+var PRESETS={
+ ideal:      {label:'Ideal',            order:['eff','care','temp','hash'], w:{eff:30,care:25,temp:25,hash:20}},
+ equilibrada:{label:'Más equilibrada',  order:['hash','eff','care','temp'], maximin:true},
+ potencia:   {label:'Máxima potencia',  order:['hash','eff','care','temp'], w:{hash:70,eff:20,care:5,temp:5}},
+ eficiente:  {label:'Eficiente',        order:['eff','cost','care','temp'], w:{eff:50,cost:30,care:10,temp:10}},
+ cuidado:    {label:'Cuidado máximo',   order:['care','temp','stab'],       w:{care:40,temp:30,stab:30}},
+ verano:     {label:'Verano',           order:['temp','care','eff'],        w:{temp:50,care:30,eff:20}}
+};
+var WRANK={1:[100],2:[60,40],3:[50,30,20],4:[40,30,20,10],5:[35,25,20,12,8]};
+var R85=0.150, EUR=0.0864, LIM={m2:85,a:18,rech:1.0,stable:0.5};
+
+/* ===== Núcleo de cálculo (sin DOM) ===== */
+function derive(c){
+  var d={}; for(var k in c) d[k]=c[k];
+  d.jth=c.w/c.ths; d.eur=c.w*EUR; d.effths=c.ths*(1-c.rech/100);
+  d.fan=(c.m1+c.m2)/2; d.ambmax=c.asic-R85*c.w; return d;
+}
+function mkNorm(vals,higher){
+  var lo=Math.min.apply(null,vals), hi=Math.max.apply(null,vals);
+  return function(x){ return hi===lo?100:100*((higher?x-lo:hi-x)/(hi-lo)); };
+}
+function reason(c,st){
+  if(st.targets.indexOf(c.asic)<0) return 'Target de ASIC a '+c.asic+' °C no permitido';
+  if(c.m2>LIM.m2) return 'Ventilador M2 al '+c.m2+'% (límite 85%)';
+  if(c.a>LIM.a) return 'Corriente de '+fmt(c.a,1)+' A (límite 18 A)';
+  if(c.rech>LIM.rech) return 'Rechazados al '+fmt(c.rech,2)+'% (límite 1,0%)';
+  if(st.onlyStable && c.rech>LIM.stable) return 'Rechazados al '+fmt(c.rech,2)+'% (no estable, >0,5%)';
+  if(c.ambmax<st.room) return 'No sostiene el ASIC a '+c.asic+' °C con M2 ≤85% a '+fmt(st.room,1)+' °C (máx. ≈'+fmt(c.ambmax,1)+' °C)';
+  return null;
+}
+function weightsFor(st){
+  if(st.mode==='custom') return st.w;
+  var act=st.order.filter(function(k){return st.active[k];});
+  var w=WRANK[act.length]||[], out={};
+  act.forEach(function(k,i){out[k]=w[i];}); return out;
+}
+function compute(st){
+  var elig=[], excl=[];
+  DATA.map(derive).forEach(function(c){
+    var r=reason(c,st); if(r) excl.push({c:c,reason:r}); else elig.push(c);
+  });
+  if(!elig.length) return {ranked:[],excl:excl,weights:{},mode:st.mode};
+  var nf=mkNorm(elig.map(function(c){return c.fan;}),false),
+      na=mkNorm(elig.map(function(c){return c.a;}),false),
+      nh=mkNorm(elig.map(function(c){return c.effths;}),true),
+      ne=mkNorm(elig.map(function(c){return c.jth;}),false),
+      nt=mkNorm(elig.map(function(c){return c.ambmax;}),true),
+      nc=mkNorm(elig.map(function(c){return c.eur;}),false),
+      nr=mkNorm(elig.map(function(c){return c.rech;}),false);
+  elig.forEach(function(c){
+    c.s={hash:nh(c.effths),eff:ne(c.jth),care:(nf(c.fan)+na(c.a))/2,temp:nt(c.ambmax),cost:nc(c.eur),stab:nr(c.rech)};
+    c.s.comfort=(c.s.care+c.s.temp)/2;
+  });
+  var cand=elig, weights={};
+  if(st.mode==='maximin'){
+    cand=[];
+    elig.forEach(function(c){ if(c.rech<=LIM.stable) cand.push(c); else excl.push({c:c,reason:'Rechazados al '+fmt(c.rech,2)+'% (no estable, >0,5%)'}); });
+    cand.forEach(function(c){ c.score=Math.min(c.s.hash,c.s.eff,c.s.comfort); });
+  } else {
+    weights=weightsFor(st);
+    var tot=0,k; for(k in weights) tot+=weights[k];
+    cand.forEach(function(c){
+      var sum=0; for(var k2 in weights) sum+=weights[k2]*c.s[k2];
+      c.score=tot?sum/tot:0;
+    });
+  }
+  cand.sort(function(a,b){ return b.score-a.score || a.w-b.w; });
+  return {ranked:cand,excl:excl,weights:weights,mode:st.mode};
+}
+function fmt(x,d){ return Number(x).toFixed(d).replace('.',','); }
+function labelOf(c){
+  return c.mhz+' MHz · '+fmt(c.v,2)+' V'+(c.mhz===700&&c.v===1.21?' (defecto)':'');
+}
+if(typeof module!=='undefined'&&module.exports){ module.exports={DATA:DATA,PRESETS:PRESETS,compute:compute,derive:derive,WRANK:WRANK}; }
+
+/* ===== Interfaz ===== */
+if(typeof document!=='undefined'){
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  var st={mode:'custom',w:PRESETS.ideal.w,order:[],active:{},room:23,targets:[50,52,55],onlyStable:false,preset:'ideal'};
+
+  function setOrder(first){
+    var rest=CRIT.map(function(c){return c.k;}).filter(function(k){return first.indexOf(k)<0;});
+    st.order=first.concat(rest); st.active={}; first.forEach(function(k){st.active[k]=true;});
+  }
+  function applyPreset(p){
+    var P=PRESETS[p]; st.preset=p; setOrder(P.order);
+    if(P.maximin){ st.mode='maximin'; st.w=null; } else { st.mode='custom'; st.w=P.w; }
+    render();
+  }
+  function toRank(){ if(st.mode!=='rank'){ st.mode='rank'; st.w=null; st.preset=null; } }
+  function nameOf(k){ return CRIT.filter(function(c){return c.k===k;})[0]; }
+
+  function renderPresets(){
+    var h=''; for(var p in PRESETS) h+='<button class="chip" data-p="'+p+'" aria-pressed="'+(st.preset===p)+'">'+PRESETS[p].label+'</button>';
+    $('presets').innerHTML=h;
+    Array.prototype.forEach.call($('presets').children,function(b){ b.onclick=function(){applyPreset(b.getAttribute('data-p'));}; });
+  }
+  function renderCrit(){
+    var res=compute(st), weights=res.weights, nAct=0, k;
+    for(k in st.active) if(st.active[k]) nAct++;
+    var h='';
+    st.order.forEach(function(key,i){
+      var c=nameOf(key), on=!!st.active[key], wtxt='';
+      if(on && st.mode==='rank' && weights[key]!=null) wtxt=weights[key]+'%';
+      if(on && st.mode==='custom' && st.w[key]!=null) wtxt=st.w[key]+'%';
+      h+='<li class="'+(on?'':'off')+'"><input type="checkbox" data-k="'+key+'" id="c_'+key+'" '+(on?'checked ':'')+((!on&&nAct>=5)?'disabled ':'')+'aria-label="Usar '+c.name+'">'
+        +'<label for="c_'+key+'"><span class="name">'+c.name+'</span><span class="hint">'+c.hint+'</span></label>'
+        +'<span class="w">'+wtxt+'</span>'
+        +'<span class="mv"><button data-up="'+i+'" aria-label="Subir '+c.name+'" '+(i===0?'disabled':'')+'>↑</button><button data-dn="'+i+'" aria-label="Bajar '+c.name+'" '+(i===st.order.length-1?'disabled':'')+'>↓</button></span></li>';
+    });
+    $('crit').innerHTML=h;
+    $('critNote').textContent = st.mode==='maximin'
+      ? 'Este perfil busca el mejor punto de equilibrio: la configuración cuyo peor criterio entre hashrate, eficiencia y comodidad es el mejor posible, entre las estables.'
+      : (nAct? 'Marca los criterios que te importan y ordénalos con las flechas: el primero pesa más. Máximo cinco.' : 'Elige al menos un criterio.');
+    Array.prototype.forEach.call($('crit').querySelectorAll('input[type=checkbox]'),function(el){
+      el.onchange=function(){
+        toRank(); var kk=el.getAttribute('data-k'); st.active[kk]=el.checked; render();
+      };
+    });
+    Array.prototype.forEach.call($('crit').querySelectorAll('button[data-up]'),function(b){
+      b.onclick=function(){ var i=+b.getAttribute('data-up'); toRank(); var t=st.order[i-1]; st.order[i-1]=st.order[i]; st.order[i]=t; render(); };
+    });
+    Array.prototype.forEach.call($('crit').querySelectorAll('button[data-dn]'),function(b){
+      b.onclick=function(){ var i=+b.getAttribute('data-dn'); toRank(); var t=st.order[i+1]; st.order[i+1]=st.order[i]; st.order[i]=t; render(); };
+    });
+  }
+  function bars(c,keys){
+    var names={care:'Cuidado',temp:'Temperatura',eff:'Eficiencia',hash:'Hashrate',cost:'Coste',stab:'Estabilidad',comfort:'Comodidad'}, h='<div class="bars">';
+    keys.forEach(function(k){ var v=c.s[k]; h+='<div class="bar"><span>'+names[k]+'</span><i><u style="width:'+v.toFixed(0)+'%"></u></i><em>'+v.toFixed(0)+'</em></div>'; });
+    return h+'</div>';
+  }
+  function renderResult(){
+    var res=compute(st), out=$('result');
+    var keys = st.mode==='maximin' ? ['hash','eff','comfort'] : Object.keys(res.weights);
+    if(st.mode==='rank' && !keys.length){ out.innerHTML='<div class="card empty">Elige al menos un criterio para ver la mejor configuración.</div>'; renderTable(res); return; }
+    if(!res.ranked.length){
+      out.innerHTML='<div class="card empty">Ninguna configuración cumple tus condiciones. Prueba a bajar la habitación, a permitir más targets de ASIC o a quitar el filtro de estables.</div>'; renderTable(res); return;
+    }
+    var b=res.ranked[0], scoreLbl = st.mode==='maximin' ? 'Peor criterio' : 'Puntuación';
+    var settings='Frecuencia '+b.mhz+' MHz · Voltaje '+fmt(b.v,2)+' V · Target ASIC (M2) '+b.asic+' °C · Target VR (M1) 50 °C · Apagado 70/70 °C · Reiniciar';
+    var h='<div class="card best"><div class="label">Mejor opción · '+scoreLbl+' '+b.score.toFixed(1).replace('.',',')+' de 100</div>'
+      +'<h3>'+labelOf(b)+'</h3><p class="tag">ASIC a '+b.asic+' °C · VR a 50 °C · ventiladores en PID con control separado</p>'
+      +'<div class="metrics">'
+      +'<div class="metric"><b>'+fmt(b.ths,2)+'</b><span>TH/s</span></div>'
+      +'<div class="metric"><b>'+fmt(b.w,1)+'</b><span>W (panel)</span></div>'
+      +'<div class="metric"><b>'+fmt(b.jth,2)+'</b><span>J/TH</span></div>'
+      +'<div class="metric"><b>'+fmt(b.eur,2)+' €</b><span>al mes</span></div>'
+      +'<div class="metric"><b>'+b.m2+' / '+b.m1+'%</b><span>ventiladores M2 / M1</span></div>'
+      +'<div class="metric"><b>'+fmt(b.a,1)+' A</b><span>entrada</span></div>'
+      +'<div class="metric"><b>'+fmt(b.rech,2)+'%</b><span>rechazados</span></div>'
+      +'<div class="metric"><b>≈'+fmt(b.ambmax,0)+' °C</b><span>habitación máx.</span></div></div>'
+      + bars(b,keys)
+      +'<div class="apply"><b>Ajustes a aplicar:</b> <code>'+settings+'</code><br><button class="btn" id="copy">Copiar ajustes</button></div></div>';
+    if(res.ranked.length>1){
+      h+='<div class="runners">';
+      res.ranked.slice(1,3).forEach(function(c,i){
+        h+='<div class="card"><h4>'+(i+2)+'.ª · '+labelOf(c)+' · ASIC '+c.asic+' °C</h4><div class="muted small">'+scoreLbl+' '+c.score.toFixed(1).replace('.',',')+' · '+fmt(c.ths,2)+' TH/s · '+fmt(c.w,1)+' W · '+fmt(c.jth,2)+' J/TH · '+fmt(c.eur,2)+' €/mes</div>'+bars(c,keys)+'</div>';
+      });
+      h+='</div>';
+    }
+    out.innerHTML=h;
+    var cb=$('copy'); if(cb) cb.onclick=function(){
+      try{ navigator.clipboard.writeText(settings).then(function(){cb.textContent='Copiado';},function(){cb.textContent='No se pudo copiar';}); }
+      catch(e){ cb.textContent='No se pudo copiar'; }
+    };
+    renderTable(res);
+  }
+  function renderTable(res){
+    var h='<thead><tr><th>Configuración</th><th>TH/s</th><th>W</th><th>J/TH</th><th>€/mes</th><th>M2 / M1</th><th>A</th><th>Rech.</th><th>Hab. máx.</th><th>'+(st.mode==='maximin'?'Peor crit.':'Puntos')+'</th></tr></thead><tbody>';
+    res.ranked.forEach(function(c,i){
+      h+='<tr class="'+(i===0?'top':'')+'"><td>'+labelOf(c)+' · ASIC '+c.asic+' °C</td><td>'+fmt(c.ths,2)+'</td><td>'+fmt(c.w,1)+'</td><td>'+fmt(c.jth,2)+'</td><td>'+fmt(c.eur,2)+'</td><td>'+c.m2+' / '+c.m1+'%</td><td>'+fmt(c.a,1)+'</td><td>'+fmt(c.rech,2)+'%</td><td>≈'+fmt(c.ambmax,1)+'</td><td>'+c.score.toFixed(1).replace('.',',')+'</td></tr>';
+    });
+    res.excl.sort(function(a,b){return a.c.mhz-b.c.mhz||a.c.asic-b.c.asic;}).forEach(function(e){
+      var c=e.c;
+      h+='<tr class="out"><td>'+labelOf(c)+' · ASIC '+c.asic+' °C</td><td>'+fmt(c.ths,2)+'</td><td>'+fmt(c.w,1)+'</td><td>'+fmt(c.jth,2)+'</td><td>'+fmt(c.eur,2)+'</td><td>'+c.m2+' / '+c.m1+'%</td><td>'+fmt(c.a,1)+'</td><td>'+fmt(c.rech,2)+'%</td><td>≈'+fmt(c.ambmax,1)+'</td><td>–</td></tr><tr class="why"><td colspan="10">Descartada: '+e.reason+'</td></tr>';
+    });
+    $('all').innerHTML=h+'</tbody>';
+  }
+  function renderCond(){
+    $('roomVal').textContent=fmt(st.room,1)+' °C';
+    $('roomNote').textContent = st.room>25
+      ? 'Por encima del rango probado (22 a 25 °C): el resultado es una estimación del modelo térmico, con ±2 a 3 °C.'
+      : 'Rango probado: 22 a 25 °C. Las configuraciones que no sostienen su target con el ventilador ≤85% a esta habitación se descartan.';
+  }
+  function render(){ renderPresets(); renderCrit(); renderCond(); renderResult(); }
+
+  $('room').oninput=function(){ st.room=parseFloat(this.value); renderCond(); renderCrit(); renderResult(); };
+  Array.prototype.forEach.call($('targets').querySelectorAll('input[value]'),function(el){
+    el.onchange=function(){
+      st.targets=Array.prototype.map.call($('targets').querySelectorAll('input[value]:checked'),function(x){return parseInt(x.value,10);});
+      renderCrit(); renderResult();
+    };
+  });
+  $('stable').onchange=function(){ st.onlyStable=this.checked; renderCrit(); renderResult(); };
+
+  applyPreset('ideal');
+})();
+}
+</script>
+</body>
+</html>
