@@ -5,11 +5,8 @@
 
 <p>Pruebas de frecuencia, voltaje y refrigeración en una unidad con NerdOS v1.1.0.1</p>
 
-![Hardware](https://img.shields.io/badge/hardware-NerdOctaxe_Gamma_Rev_3.1-2a78d6?style=flat-square)
-![Hardware](https://img.shields.io/badge/hardware-NerdOctaxe_Gamma_Rev_3.2-2a78d6?style=flat-square)
-![Firmware](https://img.shields.io/badge/firmware-NerdOS_v1.1.0.1-2a78d6?style=flat-square)
-
 [![Abrir el configurador interactivo](https://img.shields.io/badge/Abrir_el_configurador_interactivo-%E2%86%92-2a78d6?style=for-the-badge)](https://function0xmarki.github.io/Nerd-Octaxe-tuning/)
+![Firmware](https://img.shields.io/badge/firmware-NerdOS_v1.1.0.1-2a78d6?style=flat-square)
 
 <table align="center">
 <tr>
