@@ -536,21 +536,3 @@ Consultadas el 7 de noviembre de 2026. Las dos primeras se abrieron; el resto so
 
 &nbsp;
 
-## Contenido del repositorio
-
-```text
-.
-├── README.md            Este informe
-├── docs/
-│   ├── index.html       Configurador interactivo (un solo archivo, también funciona abierto en local)
-│   └── .nojekyll
-├── data/
-│   └── pruebas.csv      Las 18 pruebas en una sola tabla (decimales con punto)
-└── assets/              Gráficos del informe en SVG, en versión clara y oscura
-```
-
-<div align="center">
-
-<sub>Informe de Marki · 7 de noviembre de 2026 · Datos de una sola unidad, medias de 1 h del panel de NerdOS</sub>
-
-</div>
