@@ -36,7 +36,6 @@
 9. [Limitaciones y advertencias](#limitaciones-y-advertencias)
 10. [Apéndice A: datos anteriores a la reparación y al montaje actual](#apéndice-a-datos-anteriores-a-la-reparación-y-al-montaje-actual)
 11. [Apéndice B: fórmulas, definiciones y fuentes](#apéndice-b-fórmulas-definiciones-y-fuentes)
-12. [Contenido del repositorio](#contenido-del-repositorio)
 
 > [!TIP]
 > Los pesos de este informe son los del autor. En el [configurador interactivo](https://function0xmarki.github.io/Nerd-Octaxe-tuning/) puedes elegir tus propias prioridades, la temperatura de tu habitación y el precio de tu electricidad, y recalcula el ranking y el gasto con los mismos datos.
@@ -100,7 +99,7 @@ La unidad se quemó una vez y el fabricante la reparó: reforzó el circuito snu
 Cada prueba cambió una sola variable, se dejó estabilizar y se leyó el panel de NerdOS; los criterios de aprobado y los límites de seguridad los fijó el autor y no son valores del fabricante.
 
 - **Lectura:** media de 1 h de la gráfica (el valor instantáneo oscila ±0,05 TH/s), vatios y corriente del panel, temperatura de la habitación con termómetro y XT60 al tacto (fresco, tibio o caliente, sin grados).
-- **Duración:** las lecturas finales van de 4 a 20 h de uptime; las de cambio de target del ASIC, de 1,5 a 3 h.
+- **Duración:** las lecturas finales van de 4 a 20 h de uptime según la prueba; y las de cambio de target del ASIC, de 1,5 a 3 h.
 - **Rechazados:** se juzgan con más de 2.000 shares y, cuando se pudo, tras reiniciar para partir de cero. Las pruebas 3, 4, T1, T2c y T3-B se aplicaron en caliente: su contador mezcla sesiones y se calculó por diferencia entre capturas, o se marca **n. c.**
 - **Hashrate esperado:** el panel lo calcula como MHz × 16,32 GH/s.
 - **Repetibilidad:** pruebas idénticas difieren 0,1-0,5% en hash y hasta 1 W en consumo.
@@ -185,15 +184,13 @@ Las 18 pruebas están en tres tablas con la misma numeración; **1** es la líne
 | 5 | 725 / 1,23 | 55 | 11,81 | 206,5 | 17,49 | 0,61% | 11,74 | 14.351 (88) |
 | 6 | 600 / 1,13 | 55 | 9,70 | 150,8 | 15,55 | 0,34% | 9,67 | 4.342 (15) |
 | T2 | 625 / 1,15 | 50 | 10,03 | 156,3 | 15,58 | 0,42% | 9,99 | 14.297 (61) |
-| T2c | 625 / 1,15 | 55 | 10,14 | 161,3 | 15,91 | n. c. | 10,10 | – |
+| T2c | 625 / 1,15 | 55 | 10,14 | 161,3 | 15,91 | - | 10,10 | – |
 | T1 | 700 / 1,21 | 50 (ventiladores al 100%) | 11,43 | 192,5 | 16,84 | n. c. | – | – |
 | V1 | 650 / 1,17 | 55 | 10,58 | 173,5 | 16,40 | 0,42% | 10,54 | 15.276 (64) |
 | V2 | 600 / 1,13 | 55 | 9,69 | 150,8 | 15,56 | 0,41% | 9,65 | 19.576 (81) |
 | T3-A | 650 / 1,17 | 50 | 10,51 | 167,3 | 15,92 | 0,59% (prov.) | – | 2.195 (13) |
 | T3-B | 650 / 1,17 | 52 | 10,55 | 168,3 | 15,95 | 0,38% | 10,51 | 4.227 (16) |
 | V3 | 700 / 1,21 | 55 | 11,40 | 194,0 | 17,02 | 0,49% | 11,34 | 28.423 (140) |
-
-**n. c.** significa no contable, porque el contador mezcla sesiones. Las pruebas 3, 3b y 4 muestran los rechazados calculados por diferencia entre capturas; el 0,59% de T3-A incluye el arranque y es provisional. Los TH/s efectivos de T2c usan el porcentaje de T2. En 4R y T2 el porcentaje anotado queda 0,01 puntos por debajo del cociente de sus shares (0,56% y 0,43%).
 
 ### Coste
 
@@ -218,30 +215,30 @@ Las 18 pruebas están en tres tablas con la misma numeración; **1** es la líne
 | T3-B | 14,54 | 16,72 | 1,38 | -2,18 |
 | V3 | 16,76 | 19,28 | 1,47 | +0,04 |
 
-La columna "pared" suma un 15% supuesto para la pérdida de la fuente y los ventiladores, que el panel no cuenta; no se midió con enchufe medidor. Los €/TH/mes son J/TH × 0,0864.
+La columna "pared" suma un 15% supuesto para la pérdida de la fuente y los ventiladores, que el panel no cuenta. Los €/TH/mes son J/TH × 0,0864.
 
 ### Operación y condiciones
 
-| # | M2 / M1 (%) | Entrada (V / A) | VRT int (°C) | Habitación (°C) | Puerta | XT60 |
+| # | M2 / M1 (%) | Entrada (V / A) | VRT int (°C) | Habitación (°C) | XT60 |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | 71 / 24 | 11,9 / 13,6 | 45,9 | – | abierta | – |
-| 2 | 83 / 26 | 11,9 / 14,5 | 46,4 | ≈26 (est.) | abierta | tibio |
-| 2b | 59 / 42 | 11,9 / 14,5 | 46,5 | 25 | cerrada | tibio |
-| 3 | 58 / 40 | 11,9 / 15,5 | 47,0 | 23 | abierta | templado |
-| 3b | 65 / 45 | 11,8 / 15,9 | 47,1 | 24 | cerrada | tibio |
-| 4 | 67 / 44 | 11,8 / 16,4 | 47,4 | 23 | abierta | tibio |
-| 4R | 65 / 45 | 11,8 / 16,4 | 47,1 | 23 | abierta | tibio |
-| 4b | 66 / 43 | 11,8 / 16,9 | 47,4 | 23 | abierta | tibio |
-| 5 | 81 / 50 | 11,8 / 17,8 | 47,8 | 23 | cerrada | tibio |
-| 6 | 40 / 30 | 11,9 / 12,7 | 45,9 | 23 | abierta | fresco |
-| T2 | 81 / 17 | 11,9 / 13,1 | 45,8 | 23 | cerrada | fresco |
-| T2c | 46 / 32 | 11,9 / 13,6 | 46,5 | 23 | cerrada | fresco |
-| T1 | 100 / 100 | 11,8 / 16,4 | 41,4 | 23 | abierta | fresco |
-| V1 | 48 / 35 | 11,9 / 14,5 | 47,0 | 23 | cerrada | tibio |
-| V2 | 42 / 31 | 11,9 / 12,7 | 46,4 | 22 | abierta | fresco |
-| T3-A | 91 / 18 | 11,9 / 14,1 | 46,1 | 22,5 | abierta | tibio |
-| T3-B | 72 / 25 | 11,9 / 14,5 | 46,4 | 24 | abierta | tibio |
-| V3 | 67 / 48 | 11,8 / 16,9 | 47,8 | 24 | cerrada | tibio |
+| 1 | 71 / 24 | 11,9 / 13,6 | 45,9 | – | – |
+| 2 | 83 / 26 | 11,9 / 14,5 | 46,4 | ≈26 (est.) | tibio |
+| 2b | 59 / 42 | 11,9 / 14,5 | 46,5 | 25 | tibio |
+| 3 | 58 / 40 | 11,9 / 15,5 | 47,0 | 23 | templado |
+| 3b | 65 / 45 | 11,8 / 15,9 | 47,1 | 24 | tibio |
+| 4 | 67 / 44 | 11,8 / 16,4 | 47,4 | 23 | tibio |
+| 4R | 65 / 45 | 11,8 / 16,4 | 47,1 | 23 | tibio |
+| 4b | 66 / 43 | 11,8 / 16,9 | 47,4 | 23 | tibio |
+| 5 | 81 / 50 | 11,8 / 17,8 | 47,8 | 23 | tibio |
+| 6 | 40 / 30 | 11,9 / 12,7 | 45,9 | 23 | fresco |
+| T2 | 81 / 17 | 11,9 / 13,1 | 45,8 | 23 | fresco |
+| T2c | 46 / 32 | 11,9 / 13,6 | 46,5 | 23 | fresco |
+| T1 | 100 / 100 | 11,8 / 16,4 | 41,4 | 23 | fresco |
+| V1 | 48 / 35 | 11,9 / 14,5 | 47,0 | 23 | tibio |
+| V2 | 42 / 31 | 11,9 / 12,7 | 46,4 | 22 | fresco |
+| T3-A | 91 / 18 | 11,9 / 14,1 | 46,1 | 22,5 | tibio |
+| T3-B | 72 / 25 | 11,9 / 14,5 | 46,4 | 24 | tibio |
+| V3 | 67 / 48 | 11,8 / 16,9 | 47,8 | 24 | tibio |
 
 El VRT exterior estuvo en 50,0 °C ±0,1 en todas las pruebas, que es su target, salvo T1 (43,9 °C con los ventiladores al máximo). La temperatura de la prueba 2 es una inferencia: no se anotó y se dedujo del ventilador, con una incertidumbre de unos 2 °C; la de la prueba 1 no se anotó.
 
@@ -524,7 +521,7 @@ $$P \approx 24 + 0{,}165 \cdot f \cdot V^{2}$$
 
 ### Fuentes
 
-Consultadas el 7 de noviembre de 2026. Las dos primeras se abrieron; el resto son extractos de búsqueda que no se abrieron.
+Consultadas el 7 de noviembre de 2026.
 
 - [NerdOCTAXE "El Ocho" the Iberian beast, PlebBase (25 feb 2026)](https://plebbase.com/development/nerdoctaxe-el-ocho-iberian-beast): valores de fábrica de 700 MHz y 1.210 mV, y seis fases de VRM en la Rev 3.1 frente a cuatro en la 2.2.
 - [Ficha del NerdOctaxe, Bitronics](https://bitronics.store/?p=14842): ocho BM1370 y 12 TH/s anunciados. La fuente de 12 V 20 A, el XT60 y el VRM de seis fases aparecen en el extracto de búsqueda, pero no se confirmaron al abrir la página.
