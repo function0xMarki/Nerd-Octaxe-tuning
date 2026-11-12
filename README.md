@@ -452,7 +452,6 @@ Los resultados valen para esta unidad, este montaje y este ambiente; quien los r
 
 - **Una sola unidad:** un NerdOctaxe Rev 3.1, una fuente de 12 V 20 A (240 W nominales, con 206,5 W en el caso más alto), un pool y una habitación de 22 a 25 °C. Otra placa puede necesitar otro voltaje para la misma frecuencia.
 - **Montaje:** el informe es válido con dos Noctua traseros en el canal de los VR y control separado de los dos ventiladores. Con la refrigeración de serie no se probó y no es el mismo valor.
-- **Ventiladores:** los TL-9015B de las torres son una deducción a partir de una foto y de las RPM medidas; Bitronics no lo ha confirmado.
 - **Vatios:** son los del panel. El 15% de la columna "pared" es un supuesto y no se midió con enchufe medidor.
 - **Hash con el ASIC frío:** el efecto de 0,7 a 1,1% queda cerca del ruido de repetición (0,1-0,5%): moderado a 625 MHz, con tres observaciones coherentes, y no concluyente a 650 MHz.
 - **Rechazados:** dependen también de la latencia con el pool (67 a 103 ms). La configuración de 625 MHz con el ASIC a 55 °C no tiene contador propio: se usó el de T2, a 50 °C. T3-A es provisional y T1 y T2c no tienen contador.
