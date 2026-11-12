@@ -55,6 +55,8 @@ button{font:inherit; color:inherit; cursor:pointer}
 .row{display:flex; flex-wrap:wrap; gap:18px 28px; align-items:center}
 .row label{display:flex; align-items:center; gap:8px; flex-wrap:wrap; max-width:100%}
 input[type=range]{width:240px; max-width:100%; accent-color:var(--accent)}
+input.num{font:inherit; color:inherit; width:5.2em; padding:6px 8px; text-align:right; border:1px solid var(--line); border-radius:8px; background:var(--surface)}
+input.num[aria-invalid="true"]{border-color:var(--warn)}
 .best{border-color:var(--accent); background:linear-gradient(180deg,var(--accent-soft),var(--surface) 70%)}
 .best .label{font-size:.78rem; text-transform:uppercase; letter-spacing:.08em; color:var(--accent); font-weight:650}
 .best h3{margin:4px 0 2px; font-size:clamp(1.4rem,4vw,1.9rem); font-weight:650; letter-spacing:-.01em}
@@ -120,6 +122,10 @@ footer{margin-top:40px; color:var(--muted); font-size:.82rem}
         <label>Habitación <input type="range" id="room" min="18" max="34" step="0.5" value="23" aria-describedby="roomNote"> <b id="roomVal"></b></label>
       </div>
       <p class="muted small" id="roomNote" style="margin:8px 0 14px"></p>
+      <div class="row">
+        <label>Precio de la luz <input class="num" type="text" inputmode="decimal" id="price" value="0,12" autocomplete="off" aria-describedby="priceNote"> €/kWh</label>
+      </div>
+      <p class="muted small" id="priceNote" style="margin:8px 0 14px"></p>
       <div class="row" id="targets">
         <span>Target de ASIC permitido:</span>
         <label><input type="checkbox" value="50" checked> 50 °C</label>
@@ -146,7 +152,7 @@ footer{margin-top:40px; color:var(--muted); font-size:.82rem}
         <li><b>Cuidado</b> es la media de dos subíndices: esfuerzo de ventiladores (media del % de M2 y M1) y corriente de entrada. <b>Temperatura</b> es la habitación máxima que sostiene el target del ASIC con M2 ≤85%: T ASIC − 0,150 K/W × W, una estimación con ±2 a 3 °C.</li>
         <li>Solo compiten configuraciones seguras: M2 ≤85%, corriente ≤18 A y rechazados ≤1,0%. 650 MHz / 1,17 V con el ASIC a 50 °C queda fuera siempre, con M2 al 91%.</li>
         <li>"Más equilibrada" elige la configuración cuyo peor criterio entre hashrate, eficiencia y comodidad (media de cuidado y temperatura) es el mejor posible, entre las estables.</li>
-        <li>Coste con los vatios del panel, 0,12 €/kWh, 24 h × 30 días. Los vatios de pared serían entre un 8 y un 19% mayores; no se midieron.</li>
+        <li>Coste: vatios del panel × 0,72 kWh al mes por vatio (24 h × 30 días) × tu precio por kWh; el año son 365 días. Por defecto 0,12 €/kWh, el precio del informe. Es una aproximación: no incluye el término fijo ni los impuestos que no estén en tu precio, y los vatios de pared serían entre un 8 y un 19% mayores; no se midieron.</li>
       </ul>
     </details>
   </section>
@@ -177,7 +183,7 @@ var CRIT=[
  {k:'temp', name:'Temperatura', hint:'Margen térmico: la habitación máxima que aguanta con el ASIC en su target y el ventilador ≤85%.'},
  {k:'eff',  name:'Eficiencia', hint:'Menos julios por terahash (J/TH).'},
  {k:'hash', name:'Hashrate', hint:'TH/s efectivos, descontando los rechazados.'},
- {k:'cost', name:'Coste mensual', hint:'Euros al mes con los vatios del panel.'},
+ {k:'cost', name:'Coste mensual', hint:'Euros al mes con los vatios del panel y tu precio de la luz.'},
  {k:'stab', name:'Estabilidad', hint:'Menos shares rechazados.'}
 ];
 var PRESETS={
@@ -189,12 +195,13 @@ var PRESETS={
  verano:     {label:'Verano',           order:['temp','care','eff'],        w:{temp:50,care:30,eff:20}}
 };
 var WRANK={1:[100],2:[60,40],3:[50,30,20],4:[40,30,20,10],5:[35,25,20,12,8]};
-var R85=0.150, EUR=0.0864, LIM={m2:85,a:18,rech:1.0,stable:0.5};
+var R85=0.150, KWH_MES=0.72, KWH_ANO=8.76, PRICE0=0.12, PRICE_MAX=5, LIM={m2:85,a:18,rech:1.0,stable:0.5};
 
 /* ===== Núcleo de cálculo (sin DOM) ===== */
-function derive(c){
+function derive(c,price){
   var d={}; for(var k in c) d[k]=c[k];
-  d.jth=c.w/c.ths; d.eur=c.w*EUR; d.effths=c.ths*(1-c.rech/100);
+  var p=(typeof price==='number'&&isFinite(price)&&price>=0)?price:PRICE0;
+  d.jth=c.w/c.ths; d.eur=c.w*KWH_MES*p; d.eury=c.w*KWH_ANO*p; d.effths=c.ths*(1-c.rech/100);
   d.fan=(c.m1+c.m2)/2; d.ambmax=c.asic-R85*c.w; return d;
 }
 function mkNorm(vals,higher){
@@ -218,7 +225,7 @@ function weightsFor(st){
 }
 function compute(st){
   var elig=[], excl=[];
-  DATA.map(derive).forEach(function(c){
+  DATA.map(function(c){return derive(c,st.price);}).forEach(function(c){
     var r=reason(c,st); if(r) excl.push({c:c,reason:r}); else elig.push(c);
   });
   if(!elig.length) return {ranked:[],excl:excl,weights:{},mode:st.mode};
@@ -227,10 +234,10 @@ function compute(st){
       nh=mkNorm(elig.map(function(c){return c.effths;}),true),
       ne=mkNorm(elig.map(function(c){return c.jth;}),false),
       nt=mkNorm(elig.map(function(c){return c.ambmax;}),true),
-      nc=mkNorm(elig.map(function(c){return c.eur;}),false),
+      nc=mkNorm(elig.map(function(c){return c.w;}),false), /* coste ∝ vatios: no depende del precio */
       nr=mkNorm(elig.map(function(c){return c.rech;}),false);
   elig.forEach(function(c){
-    c.s={hash:nh(c.effths),eff:ne(c.jth),care:(nf(c.fan)+na(c.a))/2,temp:nt(c.ambmax),cost:nc(c.eur),stab:nr(c.rech)};
+    c.s={hash:nh(c.effths),eff:ne(c.jth),care:(nf(c.fan)+na(c.a))/2,temp:nt(c.ambmax),cost:nc(c.w),stab:nr(c.rech)};
     c.s.comfort=(c.s.care+c.s.temp)/2;
   });
   var cand=elig, weights={};
@@ -249,17 +256,22 @@ function compute(st){
   cand.sort(function(a,b){ return b.score-a.score || a.w-b.w; });
   return {ranked:cand,excl:excl,weights:weights,mode:st.mode};
 }
+function parsePrice(txt){
+  var t=String(txt).replace(/\s/g,'').replace(',','.');
+  if(!/^(\d+\.?\d*|\.\d+)$/.test(t)) return null;
+  var v=parseFloat(t); return (isFinite(v)&&v>=0&&v<=PRICE_MAX)?v:null;
+}
 function fmt(x,d){ return Number(x).toFixed(d).replace('.',','); }
 function labelOf(c){
   return c.mhz+' MHz · '+fmt(c.v,2)+' V'+(c.mhz===700&&c.v===1.21?' (defecto)':'');
 }
-if(typeof module!=='undefined'&&module.exports){ module.exports={DATA:DATA,PRESETS:PRESETS,compute:compute,derive:derive,WRANK:WRANK}; }
+if(typeof module!=='undefined'&&module.exports){ module.exports={DATA:DATA,PRESETS:PRESETS,compute:compute,derive:derive,WRANK:WRANK,parsePrice:parsePrice}; }
 
 /* ===== Interfaz ===== */
 if(typeof document!=='undefined'){
 (function(){
   var $=function(id){return document.getElementById(id);};
-  var st={mode:'custom',w:PRESETS.ideal.w,order:[],active:{},room:23,targets:[50,52,55],onlyStable:false,preset:'ideal'};
+  var st={mode:'custom',w:PRESETS.ideal.w,order:[],active:{},room:23,price:PRICE0,targets:[50,52,55],onlyStable:false,preset:'ideal'};
 
   function setOrder(first){
     var rest=CRIT.map(function(c){return c.k;}).filter(function(k){return first.indexOf(k)<0;});
@@ -327,7 +339,7 @@ if(typeof document!=='undefined'){
       +'<div class="metric"><b>'+fmt(b.ths,2)+'</b><span>TH/s</span></div>'
       +'<div class="metric"><b>'+fmt(b.w,1)+'</b><span>W (panel)</span></div>'
       +'<div class="metric"><b>'+fmt(b.jth,2)+'</b><span>J/TH</span></div>'
-      +'<div class="metric"><b>'+fmt(b.eur,2)+' €</b><span>al mes</span></div>'
+      +'<div class="metric"><b>'+fmt(b.eur,2)+' €</b><span>al mes · '+fmt(b.eury,0)+' € al año</span></div>'
       +'<div class="metric"><b>'+b.m2+' / '+b.m1+'%</b><span>ventiladores M2 / M1</span></div>'
       +'<div class="metric"><b>'+fmt(b.a,1)+' A</b><span>entrada</span></div>'
       +'<div class="metric"><b>'+fmt(b.rech,2)+'%</b><span>rechazados</span></div>'
@@ -365,7 +377,22 @@ if(typeof document!=='undefined'){
       ? 'Por encima del rango probado (22 a 25 °C): el resultado es una estimación del modelo térmico, con ±2 a 3 °C.'
       : 'Rango probado: 22 a 25 °C. Las configuraciones que no sostienen su target con el ventilador ≤85% a esta habitación se descartan.';
   }
+  function renderPrice(ok){
+    $('price').setAttribute('aria-invalid',ok?'false':'true');
+    $('priceNote').textContent = ok
+      ? 'Gasto aproximado con '+fmt(st.price,4).replace(/0{1,2}$/,'')+' €/kWh, los vatios del panel y 24 h al día. El informe usa 0,12 €/kWh. El precio cambia los euros, no el ranking.'
+      : 'Escribe un precio entre 0 y '+PRICE_MAX+' €/kWh, por ejemplo 0,15. Se mantiene el último válido: '+fmt(st.price,4).replace(/0{1,2}$/,'')+' €/kWh.';
+  }
   function render(){ renderPresets(); renderCrit(); renderCond(); renderResult(); }
+
+  try{ var sp=parsePrice(localStorage.getItem('nx_price')); if(sp!==null){ st.price=sp; $('price').value=String(sp).replace('.',','); } }catch(e){}
+  renderPrice(true);
+  $('price').oninput=function(){
+    var v=parsePrice(this.value);
+    if(v===null){ renderPrice(false); return; }
+    st.price=v; renderPrice(true); renderResult();
+    try{ localStorage.setItem('nx_price',String(v)); }catch(e){}
+  };
 
   $('room').oninput=function(){ st.room=parseFloat(this.value); renderCond(); renderCrit(); renderResult(); };
   Array.prototype.forEach.call($('targets').querySelectorAll('input[value]'),function(el){

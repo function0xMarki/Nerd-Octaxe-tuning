@@ -220,7 +220,7 @@ La columna "pared" suma un 15% supuesto para la pérdida de la fuente y los vent
 ### Operación y condiciones
 
 | # | M2 / M1 (%) | Entrada (V / A) | VRT int (°C) | Habitación (°C) | XT60 |
-| --- | --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- |
 | 1 | 71 / 24 | 11,9 / 13,6 | 45,9 | – | – |
 | 2 | 83 / 26 | 11,9 / 14,5 | 46,4 | ≈26 (est.) | tibio |
 | 2b | 59 / 42 | 11,9 / 14,5 | 46,5 | 25 | tibio |
