@@ -80,7 +80,7 @@ Todas las pruebas son de una sola unidad, ya reparada y con ventiladores propios
 | Firmware | NerdOS v1.1.0.1; valor de fábrica 700 MHz / 1,21 V |
 | Fuente | 12 V 20 A por XT60; la tensión de entrada marca 11,8-11,9 V en carga |
 | Pool | pool.bitronics.store:3443 (SV1), ping de 67 a 103 ms |
-| Ventiladores | Canal M2 (ASIC): 2 × Thermalright TL-9015B en las torres (modelo deducido, no confirmado por Bitronics). Canal M1 (VR): 2 × Noctua NF-A9x14 PWM traseros. Cada par en su cable Y, sin alargadores |
+| Ventiladores | Canal M2 (ASIC): 2 × Thermalright TL-9015B en las torres. Canal M1 (VR): 2 × Noctua NF-A9x14 PWM traseros |
 | Control | PID separado: ASIC a 50, 52 o 55 °C según la prueba, VR a 50 °C, apagado a 70 °C en ambos |
 | Entorno | Habitación de 22 a 25 °C, ventana cerrada; puerta abierta o cerrada anotada en cada prueba |
 | Coste eléctrico | 0,12 €/kWh, 24 h × 30 días: €/mes = W × 0,0864. La columna "pared" suma un 15% supuesto, sin medir |
