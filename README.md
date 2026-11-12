@@ -1,12 +1,12 @@
 <div align="center">
 
 <h1>NerdOctaxe Gamma Rev 3.1</h1>
+![Firmware](https://img.shields.io/badge/firmware-NerdOS_v1.1.0.1-2a78d6?style=flat-square)
 <h3>Informe de configuraciones óptimas</h3>
 
 <p>Pruebas de frecuencia, voltaje y refrigeración en una unidad con NerdOS v1.1.0.1</p>
 
 [![Abrir el configurador interactivo](https://img.shields.io/badge/Abrir_el_configurador_interactivo-%E2%86%92-2a78d6?style=for-the-badge)](https://function0xmarki.github.io/Nerd-Octaxe-tuning/)
-![Firmware](https://img.shields.io/badge/firmware-NerdOS_v1.1.0.1-2a78d6?style=flat-square)
 
 <table align="center">
 <tr>
