@@ -8,9 +8,8 @@
 ![Hardware](https://img.shields.io/badge/hardware-NerdOctaxe_Gamma_Rev_3.1-2a78d6?style=flat-square)
 ![Hardware](https://img.shields.io/badge/hardware-NerdOctaxe_Gamma_Rev_3.2-2a78d6?style=flat-square)
 ![Firmware](https://img.shields.io/badge/firmware-NerdOS_v1.1.0.1-2a78d6?style=flat-square)
-![Idioma](https://img.shields.io/badge/idioma-espa%C3%B1ol-2a78d6?style=flat-square)
 
-[![Abrir el configurador interactivo](https://img.shields.io/badge/Abrir_el_configurador_interactivo-%E2%86%92-2a78d6?style=for-the-badge)](https://TU_USUARIO.github.io/TU_REPO/)
+[![Abrir el configurador interactivo](https://img.shields.io/badge/Abrir_el_configurador_interactivo-%E2%86%92-2a78d6?style=for-the-badge)](https://function0xmarki.github.io/Nerd-Octaxe-tuning/)
 
 <table align="center">
 <tr>
@@ -40,7 +39,7 @@
 12. [Contenido del repositorio](#contenido-del-repositorio)
 
 > [!TIP]
-> Los pesos de este informe son los del autor. En el [configurador interactivo](https://TU_USUARIO.github.io/TU_REPO/) puedes elegir tus propias prioridades y la temperatura de tu habitación, y recalcula el ranking con los mismos datos.
+> Los pesos de este informe son los del autor. En el [configurador interactivo](https://function0xmarki.github.io/Nerd-Octaxe-tuning/) puedes elegir tus propias prioridades, la temperatura de tu habitación y el precio de tu electricidad, y recalcula el ranking y el gasto con los mismos datos.
 
 &nbsp;
 
@@ -57,7 +56,7 @@ Los datos salen de 18 pruebas en una sola unidad, con medias de 1 h del panel y 
 | **Más equilibrada** | 650 MHz / 1,17 V | 10,58 | 173,5 | 16,40 | 14,99 | 48 / 35 | 14,5 | 0,39% |
 | Máxima potencia sostenible (defecto de fábrica) | 700 MHz / 1,21 V | 11,40 | 194,0 | 17,02 | 16,76 | 67 / 48 | 16,9 | 0,51% |
 
-El coste usa los vatios del panel con 0,12 €/kWh, 24 h × 30 días: $C_{\mathrm{mes}} = P \times 0{,}0864$.
+El coste usa los vatios del panel con 0,12 €/kWh, 24 h × 30 días: $C_{\mathrm{mes}} = P \times 0{,}0864$. Con otro precio $p$ en €/kWh, $C_{\mathrm{mes}} = P \times 0{,}72 \times p$; el configurador lo calcula con el tuyo.
 
 - **Eficiencia frente al defecto:** 600 MHz da un 15,0% menos de hash, un 22,3% menos de potencia (3,73 €/mes menos) y un 8,6% mejor J/TH que 700 MHz / 1,21 V.
 - **Coste de la potencia:** de 600 a 725 MHz el hash sube un 21,9% (9,69 a 11,81 TH/s) y el gasto un 36,9% (13,03 a 17,84 €/mes). Cada TH/s adicional cuesta unos 26 J.
@@ -180,21 +179,21 @@ Las 18 pruebas están en tres tablas con la misma numeración; **1** es la líne
 | 2b | 650 / 1,17 | 55 | 10,57 | 172,8 | 16,35 | 0,36% | 10,53 | 12.402 (45) |
 | 3 | 675 / 1,19 | 55 | 11,00 | 182,8 | 16,62 | 0,72% | 10,92 | 6.639 (48) |
 | 3b | 675 / 1,20 | 55 | 10,99 | 186,8 | 17,00 | 0,44% | 10,94 | 12.498 (55) |
-| 4 | 700 / 1,21 | 55 | 11,40 | 193,5 | 16,98 | 0,67% | 11,32 | 1.944 (13) |
+| 4 | 700 / 1,21 | 55 | 11,40 | 193,5 | 16,97 | 0,67% | 11,32 | 1.944 (13) |
 | 4R | 700 / 1,21 | 55 | 11,41 | 193,5 | 16,96 | 0,55% | 11,35 | 7.174 (40) |
 | 4b | 700 / 1,22 | 55 | 11,39 | 198,3 | 17,41 | 0,65% | 11,32 | 8.191 (53) |
 | 5 | 725 / 1,23 | 55 | 11,81 | 206,5 | 17,49 | 0,61% | 11,74 | 14.351 (88) |
 | 6 | 600 / 1,13 | 55 | 9,70 | 150,8 | 15,55 | 0,34% | 9,67 | 4.342 (15) |
 | T2 | 625 / 1,15 | 50 | 10,03 | 156,3 | 15,58 | 0,42% | 9,99 | 14.297 (61) |
-| T2c | 625 / 1,15 | 55 | 10,14 | 161,3 | 15,90 | n. c. | 10,10 | – |
-| T1 | 700 / 1,21 | 50 (ventiladores al 100%) | 11,43 | 192,5 | 16,84 | n. c. | 11,40 | – |
+| T2c | 625 / 1,15 | 55 | 10,14 | 161,3 | 15,91 | n. c. | 10,10 | – |
+| T1 | 700 / 1,21 | 50 (ventiladores al 100%) | 11,43 | 192,5 | 16,84 | n. c. | – | – |
 | V1 | 650 / 1,17 | 55 | 10,58 | 173,5 | 16,40 | 0,42% | 10,54 | 15.276 (64) |
 | V2 | 600 / 1,13 | 55 | 9,69 | 150,8 | 15,56 | 0,41% | 9,65 | 19.576 (81) |
 | T3-A | 650 / 1,17 | 50 | 10,51 | 167,3 | 15,92 | 0,59% (prov.) | – | 2.195 (13) |
 | T3-B | 650 / 1,17 | 52 | 10,55 | 168,3 | 15,95 | 0,38% | 10,51 | 4.227 (16) |
 | V3 | 700 / 1,21 | 55 | 11,40 | 194,0 | 17,02 | 0,49% | 11,34 | 28.423 (140) |
 
-**n. c.** significa no contable, porque el contador mezcla sesiones. Las pruebas 3, 3b y 4 muestran los rechazados calculados por diferencia entre capturas; el 0,59% de T3-A incluye el arranque y es provisional.
+**n. c.** significa no contable, porque el contador mezcla sesiones. Las pruebas 3, 3b y 4 muestran los rechazados calculados por diferencia entre capturas; el 0,59% de T3-A incluye el arranque y es provisional. Los TH/s efectivos de T2c usan el porcentaje de T2. En 4R y T2 el porcentaje anotado queda 0,01 puntos por debajo del cociente de sus shares (0,56% y 0,43%).
 
 ### Coste
 
@@ -254,7 +253,7 @@ La eficiencia mejora de forma continua al bajar frecuencia y voltaje, el voltaje
 
 ### Eficiencia y potencia
 
-- **Curva de eficiencia:** 15,55-15,56 J/TH a 600 MHz, y lo mismo a 625 MHz con el ASIC a 52 °C; sube a 16,40 (650 MHz), 17,02 (700 MHz) y 17,49 (725 MHz). No hay un codo marcado: cada paso de 25 MHz cuesta entre 17 y 28 J por TH/s adicional.
+- **Curva de eficiencia:** 15,55-15,56 J/TH a 600 MHz, y lo mismo a 625 MHz con el ASIC a 52 °C; sube a 16,40 (650 MHz), 17,02 (700 MHz) y 17,49 (725 MHz). No hay un codo marcado: cada paso de 25 MHz cuesta entre 17 y 33 J por TH/s adicional (26 de media).
 - **Modelo de potencia:** con $f$ en MHz y $V$ en voltios, reproduce los vatios de las 8 configuraciones con el ASIC a 55 °C con un error máximo de 2,7 W; con el ASIC a 50-52 °C da de 2,5 a 4,1 W de más, porque ese target ahorra 4 a 5 W. Sugiere unos 24 W de consumo base que no baja con la frecuencia; es un ajuste, no una medida.
 - **Frente al defecto de fábrica:** 725 MHz suma 3,6% de hash por 6,4% más de potencia; 650 MHz resta 7,2% de hash y 10,6% de potencia (1,77 €/mes menos).
 
@@ -272,7 +271,7 @@ $$P \approx 24 + 0{,}165 \cdot f \cdot V^{2}$$
 
 ### Voltaje y rechazados
 
-- **700 MHz:** el valor de fábrica (1,21 V) da 0,51% con 35.597 shares (4R y V3). Con 1,22 V sale 0,65% con 8.191 shares, una diferencia dentro del ruido (±0,12), con 4 a 5 W más.
+- **700 MHz:** el valor de fábrica (1,21 V) da 0,51% con 35.597 shares (4R y V3). Con 1,22 V sale 0,65% con 8.191 shares: la diferencia de 0,14 puntos es de unos 1,5 errores estándar, dentro del ruido, con 4 a 5 W más.
 - **675 MHz:** 1,19 V da 0,72% (6.639 shares) y 1,20 V da 0,44% (12.498 shares). La diferencia de 0,28 puntos es de unos 2,4 errores estándar: un indicio moderado de que 10 mV ayudan aquí.
 - **Frecuencia:** los rechazados son 0,28-0,42% a 650 MHz y 0,34-0,42% a 600-625 MHz; suben hasta 700 MHz y quedan en torno a 0,6% a 725 MHz. La latencia con el pool (67 a 103 ms) influye, por lo que no son solo del chip.
 
@@ -392,7 +391,7 @@ La configuración 650 MHz / 1,17 V con el ASIC a 50 °C queda fuera por M2 al 91
 
 ## Perfiles por prioridades
 
-Cada perfil es un reparto de pesos sobre los mismos criterios; las tres mejores configuraciones de cada uno salen de la misma tabla de puntuaciones y se recalculan en el [configurador interactivo](https://TU_USUARIO.github.io/TU_REPO/) que acompaña al informe.
+Cada perfil es un reparto de pesos sobre los mismos criterios; las tres mejores configuraciones de cada uno salen de la misma tabla de puntuaciones y se recalculan en el [configurador interactivo](https://function0xmarki.github.io/Nerd-Octaxe-tuning/) que acompaña al informe.
 
 | Perfil | Pesos | 1.ª | 2.ª | 3.ª |
 | --- | --- | --- | --- | --- |
@@ -462,7 +461,7 @@ Los resultados valen para esta unidad, este montaje y este ambiente; quien los r
 - **Vatios:** son los del panel. El 15% de la columna "pared" es un supuesto y no se midió con enchufe medidor.
 - **Hash con el ASIC frío:** el efecto de 0,7 a 1,1% queda cerca del ruido de repetición (0,1-0,5%): moderado a 625 MHz, con tres observaciones coherentes, y no concluyente a 650 MHz.
 - **Rechazados:** dependen también de la latencia con el pool (67 a 103 ms). La configuración de 625 MHz con el ASIC a 55 °C no tiene contador propio: se usó el de T2, a 50 °C. T3-A es provisional y T1 y T2c no tienen contador.
-- **Corriente:** la lectura del panel puede diferir hasta 0,4 A de W ÷ V; para los límites se usó el valor mayor.
+- **Corriente:** la lectura del panel puede diferir hasta 0,5 A de W ÷ V; para los límites se usó el valor mayor.
 - **Duración desigual:** las lecturas van de 1,5 a 20 h; ninguna prueba duró 24 h seguidas.
 - **Desgaste:** el porcentaje de los ventiladores y la corriente de entrada son indicadores, no medidas de vida útil. El fabricante no publica un límite de temperatura del VR; el de 60 °C es del autor.
 - **Rango probado:** de 600 a 725 MHz, con saltos de 25 MHz y de 10 mV. No se buscó el voltaje mínimo estable de cada frecuencia, y no se probó por debajo de 600 MHz.
@@ -485,7 +484,7 @@ Estos datos son de la placa antes de que el fabricante reforzara el circuito snu
 | 650 / 1,16 | 167,8 | – | – | 1,07% | |
 | 650 / 1,15 | 166,5 | más bajo | – | 0,33% | hash más bajo que con 1,18 V |
 | 650 / 1,18 | 177,3 | 10,635 | 16,67 | 0,00% (553 shares) | lectura corta |
-| 650 / 1,18 | 177,0 | 10,610 | 16,66 | 0,17% (30.787 shares) | pool.bitronics.store:3333 |
+| 650 / 1,18 | 177,0 | 10,610 | 16,68 | 0,17% (30.787 shares) | pool.bitronics.store:3333 |
 | 625 / 1,16 | 162,8 | 10,172 | 16,00 | 0,06% (171.473 shares) | |
 
 Solo los vatios son fiables en la fila de 700 MHz. Las filas de 650 / 1,18 y 625 / 1,16 son anteriores a la reparación y no se comparan con las de la placa actual: cambian la placa, el pool y el puerto.
