@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>NerdOctaxe Rev 3.1+ · Elige tu configuración</title>
+<title>NerdOctaxe Rev 3.1 (snubber 3.2) · Elige tu configuración</title>
 <style>
 :root{
   --bg:#fafaf9; --surface:#ffffff; --text:#1c1917; --muted:#6b6560; --line:#e7e5e4;
@@ -101,7 +101,7 @@ footer{margin-top:40px; color:var(--muted); font-size:.82rem}
 <body>
 <div class="wrap">
   <header>
-    <h1>NerdOctaxe Rev 3.1+: elige tu configuración</h1>
+    <h1>NerdOctaxe Rev 3.1 (snubber 3.2): elige tu configuración</h1>
     <p class="sub">Ordena lo que te importa y la página te dice qué frecuencia, voltaje y target de ASIC usar. Los datos salen de 18 pruebas en una sola unidad, con NerdOS v1.1.0.1.</p>
     <div class="note"><b>Antes de usarla:</b> los valores son de una unidad concreta, con dos ventiladores Noctua traseros para los VR y control separado de los dos ventiladores, en una habitación de 22 a 25 °C. Con la refrigeración de serie no se han probado y no valen. Subir frecuencia o voltaje puede dañar el equipo. Actúa únicamente bajo tu propia responsabilidad.</div>
   </header>
@@ -158,7 +158,7 @@ footer{margin-top:40px; color:var(--muted); font-size:.82rem}
   </section>
 
   <footer>
-    Datos: informe de configuraciones óptimas del NerdOctaxe Gamma Rev 3.1 (VRM de 6 fases y snubber mejorado), NerdOS v1.1.0.1, pool pool.bitronics.store:3443. Medias de 1 h del panel; sesiones de 1,5 a 20 h. Resultados de una sola unidad: mide los tuyos antes de copiar un valor.
+    Datos: informe de configuraciones óptimas del NerdOctaxe Gamma Rev 3.1 (VRM de 6 fases y circuito snubber mejorado como la Rev 3.2), NerdOS v1.1.0.1, pool pool.bitronics.store:3443. Medias de 1 h del panel; sesiones de 1,5 a 20 h. Resultados de una sola unidad: mide los tuyos antes de copiar un valor.
   </footer>
 </div>
 
@@ -187,7 +187,7 @@ var CRIT=[
  {k:'stab', name:'Estabilidad', hint:'Menos shares rechazados.'}
 ];
 var PRESETS={
- ideal:      {label:'Ideal',            order:['eff','care','temp','hash'], w:{eff:30,care:25,temp:25,hash:20}},
+ ideal:      {label:'Ideal',            order:['care','temp','eff','hash'], w:{care:25,temp:25,eff:30,hash:20}},
  equilibrada:{label:'Más equilibrada',  order:['hash','eff','care','temp'], maximin:true},
  potencia:   {label:'Máxima potencia',  order:['hash','eff','care','temp'], w:{hash:70,eff:20,care:5,temp:5}},
  eficiente:  {label:'Eficiente',        order:['eff','cost','care','temp'], w:{eff:50,cost:30,care:10,temp:10}},

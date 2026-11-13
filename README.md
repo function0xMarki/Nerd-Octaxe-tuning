@@ -3,10 +3,11 @@
 <h1>NerdOctaxe Gamma Rev 3.1</h1>
 <h3>Informe de configuraciones óptimas</h3>
 
-<p>Pruebas de frecuencia, voltaje y refrigeración en una unidad con NerdOS v1.1.0.1</p>
+<p>Pruebas de frecuencia, voltaje y refrigeración en una unidad Rev 3.1 con el circuito snubber mejorado como la Rev 3.2, con NerdOS v1.1.0.1</p>
 
 [![Abrir el configurador interactivo](https://img.shields.io/badge/Abrir_el_configurador_interactivo-%E2%86%92-2a78d6?style=for-the-badge)](https://function0xmarki.github.io/Nerd-Octaxe-tuning/)
 
+![Hardware](https://img.shields.io/badge/hardware-NerdOctaxe_Gamma_Rev_3.1_%28snubber_3.2%29-2a78d6?style=flat-square)
 ![Firmware](https://img.shields.io/badge/firmware-NerdOS_v1.1.0.1-2a78d6?style=flat-square)
 
 <table align="center">
@@ -76,13 +77,13 @@ Todas las pruebas son de una sola unidad, ya reparada y con ventiladores propios
 | Elemento | Detalle |
 | --- | --- |
 | Equipo | NerdOctaxe Gamma Rev 3.1 de Bitronics, 8 × BM1370, con el circuito snubber mejorado como la Rev 3.2 (dato de BitMaker, sin documentación pública) |
-| Alimentación del chip | VRM de 6 fases con controlador TPS53667 (descripción de Bitronics) |
+| Alimentación del chip | VRM de 6 fases con controlador TPS53667 (según PlebBase) |
 | Firmware | NerdOS v1.1.0.1; valor de fábrica 700 MHz / 1,21 V |
 | Fuente | 12 V 20 A por XT60; la tensión de entrada marca 11,8-11,9 V en carga |
 | Pool | pool.bitronics.store:3443 (SV1), ping de 67 a 103 ms |
 | Ventiladores | Canal M2 (ASIC): 2 × Thermalright TL-9015B en las torres. Canal M1 (VR): 2 × Noctua NF-A9x14 PWM traseros |
 | Control | PID separado: ASIC a 50, 52 o 55 °C según la prueba, VR a 50 °C, apagado a 70 °C en ambos |
-| Entorno | Habitación de 22 a 25 °C, ventana cerrada; puerta abierta o cerrada anotada en cada prueba |
+| Entorno | Habitación de 22 a 25 °C, ventana cerrada |
 | Coste eléctrico | 0,12 €/kWh, 24 h × 30 días: €/mes = W × 0,0864. La columna "pared" suma un 15% supuesto, sin medir |
 
 La unidad se quemó una vez y el fabricante la reparó: reforzó el circuito snubber y añadió disipadores de aluminio pasivos en los VR. Los datos anteriores a esa reparación van aparte, en el [Apéndice A](#apéndice-a-datos-anteriores-a-la-reparación-y-al-montaje-actual).
@@ -97,8 +98,8 @@ La unidad se quemó una vez y el fabricante la reparó: reforzó el circuito snu
 Cada prueba cambió una sola variable, se dejó estabilizar y se leyó el panel de NerdOS; los criterios de aprobado y los límites de seguridad los fijó el autor y no son valores del fabricante.
 
 - **Lectura:** media de 1 h de la gráfica (el valor instantáneo oscila ±0,05 TH/s), vatios y corriente del panel, temperatura de la habitación con termómetro y XT60 al tacto (fresco, tibio o caliente, sin grados).
-- **Duración:** las lecturas finales van de 4 a 20 h de uptime según la prueba; y las de cambio de target del ASIC, de 1,5 a 3 h.
-- **Rechazados:** se juzgan con más de 2.000 shares y, cuando se pudo, tras reiniciar para partir de cero. Las pruebas 3, 4, T1, T2c y T3-B se aplicaron en caliente: su contador mezcla sesiones y se calculó por diferencia entre capturas, o se marca **n. c.**
+- **Duración:** las lecturas finales van de 4 a 20 h de uptime según la prueba, y las de cambio de target del ASIC, de 1,5 a 3 h.
+- **Rechazados:** se juzgan con más de 2.000 shares y, cuando se pudo, tras reiniciar para partir de cero. Las pruebas 3, 4, T1, T2c y T3-B se aplicaron en caliente: su contador mezcla sesiones y se calculó por diferencia entre capturas.
 - **Hashrate esperado:** el panel lo calcula como MHz × 16,32 GH/s.
 - **Repetibilidad:** pruebas idénticas difieren 0,1-0,5% en hash y hasta 1 W en consumo.
 
@@ -182,8 +183,8 @@ Las 18 pruebas están en tres tablas con la misma numeración; **1** es la líne
 | 5 | 725 / 1,23 | 55 | 11,81 | 206,5 | 17,49 | 0,61% | 11,74 | 14.351 (88) |
 | 6 | 600 / 1,13 | 55 | 9,70 | 150,8 | 15,55 | 0,34% | 9,67 | 4.342 (15) |
 | T2 | 625 / 1,15 | 50 | 10,03 | 156,3 | 15,58 | 0,42% | 9,99 | 14.297 (61) |
-| T2c | 625 / 1,15 | 55 | 10,14 | 161,3 | 15,91 | - | 10,10 | – |
-| T1 | 700 / 1,21 | 50 (ventiladores al 100%) | 11,43 | 192,5 | 16,84 | n. c. | – | – |
+| T2c | 625 / 1,15 | 55 | 10,14 | 161,3 | 15,91 | – | 10,10 | – |
+| T1 | 700 / 1,21 | 50 (ventiladores al 100%) | 11,43 | 192,5 | 16,84 | – | – | – |
 | V1 | 650 / 1,17 | 55 | 10,58 | 173,5 | 16,40 | 0,42% | 10,54 | 15.276 (64) |
 | V2 | 600 / 1,13 | 55 | 9,69 | 150,8 | 15,56 | 0,41% | 9,65 | 19.576 (81) |
 | T3-A | 650 / 1,17 | 50 | 10,51 | 167,3 | 15,92 | 0,59% (prov.) | – | 2.195 (13) |
@@ -450,7 +451,7 @@ $$T_{\mathrm{amb,max}} = T_{\mathrm{ASIC}} - R \times P \qquad\qquad \text{p. ej
 
 Los resultados valen para esta unidad, este montaje y este ambiente; quien los reproduzca debe medir los suyos antes de copiar un valor.
 
-- **Una sola unidad:** un NerdOctaxe Rev 3.1, una fuente de 12 V 20 A (240 W nominales, con 206,5 W en el caso más alto), un pool y una habitación de 22 a 25 °C. Otra placa puede necesitar otro voltaje para la misma frecuencia.
+- **Una sola unidad:** un NerdOctaxe Rev 3.1 con el circuito snubber mejorado como la Rev 3.2, una fuente de 12 V 20 A (240 W nominales, con 206,5 W en el caso más alto), un pool y una habitación de 22 a 25 °C. Otra placa puede necesitar otro voltaje para la misma frecuencia.
 - **Montaje:** el informe es válido con dos Noctua traseros en el canal de los VR y control separado de los dos ventiladores. Con la refrigeración de serie no se probó y no es el mismo valor.
 - **Vatios:** son los del panel. El 15% de la columna "pared" es un supuesto y no se midió con enchufe medidor.
 - **Hash con el ASIC frío:** el efecto de 0,7 a 1,1% queda cerca del ruido de repetición (0,1-0,5%): moderado a 625 MHz, con tres observaciones coherentes, y no concluyente a 650 MHz.
@@ -518,13 +519,13 @@ $$P \approx 24 + 0{,}165 \cdot f \cdot V^{2}$$
 
 ### Fuentes
 
-Consultadas el 7 de noviembre de 2026.
+Consultadas el 12 de noviembre de 2026.
 
-- [NerdOCTAXE "El Ocho" the Iberian beast, PlebBase (25 feb 2026)](https://plebbase.com/development/nerdoctaxe-el-ocho-iberian-beast): valores de fábrica de 700 MHz y 1.210 mV, y seis fases de VRM en la Rev 3.1 frente a cuatro en la 2.2.
-- [Ficha del NerdOctaxe, Bitronics](https://bitronics.store/?p=14842): ocho BM1370 y 12 TH/s anunciados. La fuente de 12 V 20 A, el XT60 y el VRM de seis fases aparecen en el extracto de búsqueda, pero no se confirmaron al abrir la página.
-- [NerdOctaxe con fuente de 200 W infradimensionada, D-Central](https://d-central.tech/fr/asic-troubleshooting/nerdoctaxe-200w-psu-undersized/): consumo de serie de unos 208 W y recomendación de fuentes de al menos 240 W (extracto).
-- [Amass XT60, especificación (Thingbits)](https://www.thingbits.in/products/amass-xt60-male-female-connector): 35 A con cable de 12 AWG y subida de temperatura de hasta 85 K (extracto).
-- [TPS53667, controlador multifase de TI](https://pdf.elecfans.com/BURR-BROWN/TPS53667RTAR.html): controlador citado por Bitronics para el VRM de seis fases (extracto).
+- [NerdOCTAXE "El Ocho" the Iberian beast, PlebBase (25 feb 2026)](https://plebbase.com/development/nerdoctaxe-el-ocho-iberian-beast): valores de fábrica de 700 MHz y 1.210 mV, seis fases de VRM en la Rev 3.1 frente a cuatro en la 2.2, controlador TPS53667 y fuente de 12 V 20 A (240 W).
+- [Ficha del NerdOctaxe, Bitronics](https://bitronics.store/?p=14842): ocho BM1370, 12 TH/s y 190 W anunciados para la Rev 3.1.
+- [NerdOctaxe con fuente de 200 W infradimensionada, D-Central](https://d-central.tech/fr/asic-troubleshooting/nerdoctaxe-200w-psu-undersized/): consumo de serie de unos 208 W en la toma de pared; desaconseja fuentes de menos de 240 W y recomienda 12 V 25 A (300 W).
+- [Amass XT60, especificación (Thingbits)](https://www.thingbits.in/products/amass-xt60-male-female-connector): 35 A máximo con cable de 12 AWG y subida de temperatura de hasta 85 K.
+- [TPS53667, hoja de datos de Texas Instruments](https://pdf.elecfans.com/BURR-BROWN/TPS53667RTAR.html): controlador buck multifase de hasta seis fases.
 
 &nbsp;
 
